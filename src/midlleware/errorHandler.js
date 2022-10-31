@@ -1,6 +1,6 @@
 
 function errorHandler (err, req, res, next) {
-  res.satus(500).json({
+  res.status(500).json({
     message: err.message,
     stack: err.stack
   });
@@ -8,11 +8,11 @@ function errorHandler (err, req, res, next) {
 
 function boomErrorHandler (err, req, res, next) {
   if(err.isBoom) {
-    const {ouput} = err;
-    res.status(ouput.statusCode).json(ouput.payload);
+    const {output} = err;
+    res.status(output.statusCode).json(output.payload);
   } else {
     next(err);
   }
 }
 
-module.export = { errorHandler, boomErrorHandler };
+module.exports = { errorHandler, boomErrorHandler };

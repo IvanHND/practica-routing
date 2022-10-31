@@ -18,16 +18,24 @@ class productsService {
     }
   }
   async create(body) {
-    this.products.push(body);
+    const newProduct = {
+      id: faker.datatype.uuid(),
+      ...body
+    }
+    this.products.push(newProduct);
     return body;
   }
-   find() {
+  async find() {
     return this.products;
   }
-  findOne(id) {
+  async findOne(id) {
+    const element = this.products.find(item => item.id === id);
+    if (element === undefined) {
+      throw boom.notFound('product not found');
+    }
     return this.products.find(item => item.id === id);
   }
-  update(id, change) {
+  async update(id, change) {
     const index = this.products.findIndex(item => item.id === id);
     if (index === -1) {
       throw boom.notFound('product not found');
