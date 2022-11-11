@@ -1,11 +1,9 @@
 const express = require('express');
-// const faker = require('faker');
 const productsService = require('../service/products');
 const validatorHandler = require('../midlleware/validatorHandler');
 const { createProductSchema, updateProductSchema, getProductSchema } = require('../schema/products');
 
 const service = new productsService;
-
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -18,7 +16,7 @@ router.post('/',
   async (req, res, next) => {
   try {
     const body = req.body;
-    const create = await service.create(body)
+    const create = await service.create(body);
     res.status(201).json(create);
   } catch (error) {
     next(error);

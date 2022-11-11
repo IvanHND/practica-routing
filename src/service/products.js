@@ -1,4 +1,4 @@
-const faker = require('faker');
+const { faker } = require('@faker-js/faker');
 const boom = require('@hapi/boom');
 
 class productsService {
@@ -14,14 +14,14 @@ class productsService {
         name: faker.commerce.productName(),
         price: parseInt(faker.commerce.price()),
         image: faker.image.imageUrl()
-      })
-    }
+      });
+    };
   }
   async create(body) {
     const newProduct = {
       id: faker.datatype.uuid(),
       ...body
-    }
+    };
     this.products.push(newProduct);
     return body;
   }
@@ -32,7 +32,7 @@ class productsService {
     const element = this.products.find(item => item.id === id);
     if (element === undefined) {
       throw boom.notFound('product not found');
-    }
+    };
     return this.products.find(item => item.id === id);
   }
   async update(id, change) {
