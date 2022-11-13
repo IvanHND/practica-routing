@@ -21,7 +21,8 @@ class usersService {
   async create(body) {
     const newUser = {
       id: faker.datatype.uuid(),
-      ...body
+      ...body,
+      noCompras: 0
     };
     this.users.push(newUser);
     return newUser;
